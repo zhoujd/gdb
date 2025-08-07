@@ -3,6 +3,7 @@
 SCRIPT_ROOT=$(cd $(dirname "${BASH_SOURCE[0]}") && pwd)
 SRC_ROOT=$SCRIPT_ROOT/src
 BUILD_ROOT=$SRC_ROOT/build
+TOOL_ROOT=$SCRIPT_ROOT/tool
 
 . /etc/os-release
 
@@ -11,8 +12,9 @@ GDB_SRC=gdb-${GDB_VER}
 GDB_PREFIX=/opt/zach/${GDB_SRC}
 GDB_OPT=(
     --prefix=${GDB_PREFIX}
-    --enable-tui
-    --with-python
+    --enable-tui=yes
+    --with-guile=no
+    --with-python=/usr/bin/python3
 )
 
 install_dep() {
@@ -34,6 +36,8 @@ install_bin() {
     echo "Install gdb bin to $target"
     sudo ln -sfvT $GDB_PREFIX/bin/gdb $target/gdb
     sudo ln -sfvT $GDB_PREFIX/bin/gdbserver $target/gdbserver
+    echo "Install gdb tool to $target"
+    sudo cp -fv $TOOL_ROOT/gdbtui $target/gdbtui
     echo "Install bin done"
 }
 
