@@ -33,7 +33,6 @@ install_bin() {
     target=/usr/local/bin
     echo "Install gdb bin to $target"
     sudo ln -sfvT $GDB_PREFIX/bin/gdb $target/gdb
-    sudo ln -sfvT $GDB_PREFIX/bin/gdbtui $target/gdbtui
     sudo ln -sfvT $GDB_PREFIX/bin/gdbserver $target/gdbserver
     echo "Install bin done"
 }
