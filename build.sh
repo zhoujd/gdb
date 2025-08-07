@@ -11,7 +11,8 @@ GDB_SRC=gdb-${GDB_VER}
 GDB_PREFIX=/opt/zach/${GDB_SRC}
 GDB_OPT=(
     --prefix=${GDB_PREFIX}
-    --with-python=/usr/bin/python3
+    --enable-tui
+    --with-python
 )
 
 install_dep() {
@@ -32,6 +33,8 @@ install_bin() {
     target=/usr/local/bin
     echo "Install gdb bin to $target"
     sudo ln -sfvT $GDB_PREFIX/bin/gdb $target/gdb
+    sudo ln -sfvT $GDB_PREFIX/bin/gdbtui $target/gdbtui
+    sudo ln -sfvT $GDB_PREFIX/bin/gdbserver $target/gdbserver
     echo "Install bin done"
 }
 
