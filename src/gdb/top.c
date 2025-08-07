@@ -1397,6 +1397,11 @@ command_line_input (const char *prompt_arg, const char *annotation_suffix)
 void
 print_gdb_version (struct ui_file *stream, bool interactive)
 {
+#if 1 /* reduce banner */
+  std::string v_str = string_printf ("GNU gdb %s%s zach build", PKGVERSION, version);
+  fprintf_filtered (stream, "%ps",
+		    styled_string (version_style.style (), v_str.c_str ()));
+#else
   /* From GNU coding standards, first line is meant to be easy for a
      program to parse, and is just canonical program name and version
      number, which starts after last space.  */
@@ -1457,6 +1462,7 @@ resources online at:\n    <http://www.gnu.org/software/gdb/documentation/>."));
   fprintf_filtered (stream,
 		    _("Type \"apropos word\" to search for commands \
 related to \"word\"."));
+#endif /* reduce banner */
 }
 
 /* Print the details of GDB build-time configuration.  */
