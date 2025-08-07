@@ -1,0 +1,8 @@
+## .gitignore
+
+build/
+
+Makefile
+config.log
+config.status
+serdep.tmp
